@@ -46,5 +46,34 @@
       </fieldset>
       <input type="submit" value="Submit" />
     </form>
+    <script>
+      const passwordField = document.getElementById('password');
+      const confirmPasswordField = document.getElementById('confirm-password');
+      const passwordStrengthText = document.getElementById('password-strength-text');
+
+      passwordField.addEventListener('input', () => {
+        const password = passwordField.value;
+        const strength = calculatePasswordStrength(password);
+        passwordStrengthText.textContent = `Password strength: ${strength}`;
+      });
+
+      confirmPasswordField.addEventListener('input', () => {
+        if (passwordField.value !== confirmPasswordField.value) {
+          confirmPasswordField.classList.add('invalid');
+        } else {
+          confirmPasswordField.classList.remove('invalid');
+        }
+      });
+
+      function calculatePasswordStrength(password) {
+        if (password.length < 8) {
+          return 'Weak';
+        } else if (password.length < 12) {
+          return 'Moderate';
+        } else {
+          return 'Strong';
+        }
+      }
+    </script>
   </body>
 </html>
